@@ -22,7 +22,6 @@ const Home = () => {
     useEffect(() => {
         getItems()
     }, [])
-
     return <div className="container">
         <MainContent listProducts={products} setProduct={setProduct} productActive={productActive} />
         <SideBar productActive={productActive} getItems={getItems}/>

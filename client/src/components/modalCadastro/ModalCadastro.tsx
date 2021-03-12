@@ -1,6 +1,6 @@
 import './modalCadastro.css'
 import { Button, Modal, Form } from 'semantic-ui-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import modal_cadastro from './I_modal_cadastro';
 import Api from '../../entities/api';
 import { v4 as uuid } from 'uuid'
@@ -31,6 +31,12 @@ const ModalCadastro = (props: modal_cadastro) => {
     const [open, setOpen] = useState(false)
     const [load, setLoad] = useState(false)
 
+    useEffect(() => {
+        if (props.product) {
+            setProduct(JSON.parse(JSON.stringify(props.product)))
+        }
+    }, [props.product])
+
     const handleProduct = (key: string, value: any) => setProduct({ ...product, [key]: value })
 
     const submitProduct = () => {
@@ -44,28 +50,41 @@ const ModalCadastro = (props: modal_cadastro) => {
             setOpen(false)
         })
     }
+
+    const editProduct = () => {
+        setLoad(true)
+        api.editItem(product).then(() => {
+            setLoad(false)
+            setOpen(false)
+            props.getItems()
+        }).catch(() => {
+            setLoad(false)
+            setOpen(false)
+        })
+    }
+
     return <Modal
         onClose={() => setOpen(false)}
         onOpen={() => {
             setOpen(true)
         }}
         open={open}
-        trigger={<Button content='New Product' primary size="tiny" />}
+        trigger={!props.edit ? <Button content='New Product' primary size="tiny" /> : <Button content='Edit' inverted color='blue' size="tiny" />}
     >
         <Modal.Header>New Product</Modal.Header>
         <Modal.Content>
             <Form>
                 <Form.Field>
                     <label>Name</label>
-                    <input placeholder='Name' onChange={(e) => handleProduct('name', e.target.value)} />
+                    <input placeholder='Name' required={!props.edit ? true : false} onChange={(e) => handleProduct('name', e.target.value)} value={`${product.name}`} />
                 </Form.Field>
                 <Form.Field>
                     <label>Description</label>
-                    <input placeholder='Description' onChange={(e) => handleProduct('description', e.target.value)} />
+                    <input placeholder='Description' required={!props.edit ? true : false} onChange={(e) => handleProduct('description', e.target.value)} value={`${product.description}`} />
                 </Form.Field>
                 <Form.Field>
                     <label>Price</label>
-                    <input placeholder='Price' type="number" onChange={(e) => handleProduct('price', e.target.value)} />
+                    <input placeholder='Price' required={!props.edit ? true : false} type="number" onChange={(e) => handleProduct('price', e.target.value)} value={`${product.price}`} />
                 </Form.Field>
             </Form>
         </Modal.Content>
@@ -75,7 +94,7 @@ const ModalCadastro = (props: modal_cadastro) => {
                 content="Send"
                 labelPosition='right'
                 icon='checkmark'
-                onClick={() => submitProduct()}
+                onClick={() => !props.edit ? submitProduct() : editProduct()}
                 positive
             />
         </Modal.Actions>

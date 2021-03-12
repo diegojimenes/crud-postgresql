@@ -21,4 +21,26 @@ export default class Api {
             return err
         }
     }
+
+    async deleteItem(id: String) {
+        try {
+            const products = await axios.post('http://localhost:3000/product/delete', {
+                id
+            })
+            return products.data
+        } catch (err) {
+            return err
+        }
+    }
+
+    async editItem(produtc: Product) {
+        try {
+            const products = await axios.post('http://localhost:3000/product/update', {
+                ...produtc
+            })
+            return products.data
+        } catch (err) {
+            return err
+        }
+    }
 }

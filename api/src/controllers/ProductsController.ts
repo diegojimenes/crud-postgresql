@@ -11,6 +11,22 @@ export class ProductController {
         }
     }
 
+    async search(req, res): Promise<JSON> {
+        const { search } = req.body
+        try {
+            const products = await Product.findAll({
+                where: {
+                    name: {
+                        [Op.substring]: `%${search}`
+                    }
+                }
+            })
+            return res.json(products)
+        } catch (err) {
+            return res.status(500).json(err)
+        }
+    }
+
     async store(req, res): Promise<JSON> {
         const { id, name, description, price, image } = req.body
         try {
@@ -40,7 +56,7 @@ export class ProductController {
                 }
             })
 
-            return res.json({res: `product ${id} was be updated`})
+            return res.json({ res: `product ${id} was be updated` })
         } catch (err) {
             return res.status(500).json(err)
         }
@@ -56,7 +72,7 @@ export class ProductController {
                     }
                 }
             })
-            return res.json({res: `product ${id} was be deleted`})
+            return res.json({ res: `product ${id} was be deleted` })
         } catch (err) {
             return res.status(500).json(err)
         }

@@ -7,6 +7,8 @@ const Product = new ProductController()
 
 routes.get('/product', async (req, res) => Product.index(req, res))
 
+routes.post('/product/search', async (req, res) => Product.search(req, res))
+
 routes.post('/product/create', async (req, res) => Product.store(req, res))
 
 routes.post('/product/delete', async (req, res) => Product.delete(req, res))

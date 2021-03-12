@@ -43,4 +43,15 @@ export default class Api {
             return err
         }
     }
+
+    async searchItem(search: String) {
+        try {
+            const products = await axios.post('http://localhost:3000/product/search', {
+                search
+            })
+            return products.data
+        } catch (err) {
+            return err
+        }
+    }
 }

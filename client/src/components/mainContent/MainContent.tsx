@@ -11,11 +11,11 @@ const renderProducts = (listProducts: Array<Product>, setProduct: Function) => {
 }
 
 const MainContent = (props: main_content) => {
-    const { listProducts, setProduct, productActive } = props
+    const { listProducts, setProduct, productActive, setProducts } = props
     return <div className={`main_section ${!Object.keys(productActive).length ? 'fullsize' : ''}`}>
         <header>
             <h1>Products</h1>
-            <SearchBar />
+            <SearchBar setProducts={setProducts} />
             <hr style={{ margin: 0, marginTop: 15, width: '70%' }} />
         </header>
         <section style={{ marginTop: 15 }}>

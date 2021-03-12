@@ -23,7 +23,7 @@ const Home = () => {
         getItems()
     }, [])
     return <div className="container">
-        <MainContent listProducts={products} setProduct={setProduct} productActive={productActive} />
+        <MainContent listProducts={products} setProduct={setProduct} setProducts={setProducts} productActive={productActive} />
         <SideBar productActive={productActive} getItems={getItems}/>
     </div>
 }

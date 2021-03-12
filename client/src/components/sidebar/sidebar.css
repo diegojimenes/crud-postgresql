@@ -6,3 +6,10 @@
 .sidebar_description {
     padding-left: 20px;
 }
+
+@media (max-width: 1200px)
+{
+    .side_bar {
+        display: none;
+    }
+}

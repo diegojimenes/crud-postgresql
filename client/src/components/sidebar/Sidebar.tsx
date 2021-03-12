@@ -9,7 +9,7 @@ const api = new Api()
 
 const SideBar = (props: side_bar) => {
     const { productActive, getItems } = props
-    let empty = Object.keys((productActive ?? {})).length == 0
+    let empty = Object.keys((productActive ?? {})).length === 0
     return <div className="side_bar">
         <HeaderSideBar productActive={productActive} getItems={getItems} />
         <hr style={{ width: "70%", margin: 0, marginTop: 10, marginBottom: 10 }} />
@@ -26,7 +26,7 @@ const SideBar = (props: side_bar) => {
                     getItems={getItems}
                     edit={true}
                     product={productActive} />
-                <Button content='Delete' inverted color='red' size="tiny" onClick={() => {
+                <Button style={{ marginTop: 10 }} content='Delete' inverted color='red' size="tiny" fluid onClick={() => {
                     api.deleteItem(productActive.id).then(() => {
                         getItems()
                     })

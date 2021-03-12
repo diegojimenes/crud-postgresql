@@ -25,3 +25,17 @@ hr {
 .round_image img {
     height: 100%;
 }
+
+.button_create_product_in_main_content {
+    display: none !important;   
+}
+
+@media (max-width: 1200px)
+{
+    .button_create_product_in_main_content {
+        display: block !important;        
+    }
+    .container {
+        width: 95%;
+    }
+}

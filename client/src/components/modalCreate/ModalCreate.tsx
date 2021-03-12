@@ -1,6 +1,6 @@
 import './modalCreate.css'
 import { Button, Modal, Form } from 'semantic-ui-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import modal_create from './I_modal_Create';
 import Api from '../../entities/api';
 import { v4 as uuid } from 'uuid'
@@ -104,7 +104,10 @@ const ModalCreate = (props: modal_create) => {
             setOpen(true)
         }}
         open={open}
-        trigger={!props.edit ? <Button content='New Product' primary size="tiny" /> : <Button content='Edit' inverted color='blue' size="tiny" />}
+        trigger={!props.edit ?
+            <Button content='New Product' primary size="tiny" className={`${props.className}`} /> :
+            <Button content='Edit' className={`${props.className}`} inverted color='blue' fluid size="tiny" />
+        }
     >
         <Modal.Header>{!props.edit ? "New Product" : "Edit Product"}</Modal.Header>
         <Modal.Content>

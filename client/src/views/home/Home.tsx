@@ -13,6 +13,7 @@ const Home = () => {
     const getItems = () => {
         api.listAllItems().then((products) => {
             setProducts(products)
+            setProduct(products[0])
         }).catch((err) => {
             console.log(err)
         })
@@ -23,8 +24,8 @@ const Home = () => {
     }, [])
 
     return <div className="container">
-        <MainContent listProducts={products} setProduct={setProduct} productActive={productActive}/>
-        <SideBar productActive={productActive} />
+        <MainContent listProducts={products} setProduct={setProduct} productActive={productActive} />
+        <SideBar productActive={productActive} getItems={getItems}/>
     </div>
 }
 

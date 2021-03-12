@@ -3,8 +3,8 @@ import item_interface from './I_item'
 
 const Item = (props: item_interface) => {
     return <div className="item_container" onClick={() => props.setProduct(props)}>
-        <div className="round_image">
-            <img src={`${props.image}`} />
+        <div className="round_image" style={{width: 60, height: 60}}>
+            <img src={`${props.image}`} alt=""/>
         </div>
         <div className="item_description">
             <div>

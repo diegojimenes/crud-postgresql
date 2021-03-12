@@ -14,7 +14,7 @@ const MainContent = (props: main_content) => {
     const { listProducts, setProduct, productActive } = props
     return <div className={`main_section ${!Object.keys(productActive).length ? 'fullsize' : ''}`}>
         <header>
-            <h1>Product</h1>
+            <h1>Products</h1>
             <SearchBar />
             <hr style={{ margin: 0, marginTop: 15, width: '70%' }} />
         </header>

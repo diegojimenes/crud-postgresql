@@ -1,7 +1,7 @@
 import { Button } from 'semantic-ui-react'
 import Api from '../../entities/api'
 import HeaderSideBar from '../headerSideBar/HeaderSideBar'
-import ModalCadastro from '../modalCadastro/ModalCadastro'
+import ModalCreate from '../modalCreate/ModalCreate'
 import side_bar from './I_side_bar'
 import './sidebar.css'
 
@@ -9,10 +9,11 @@ const api = new Api()
 
 const SideBar = (props: side_bar) => {
     const { productActive, getItems } = props
-    return Object.keys(productActive).length ?
-        <div className="side_bar">
-            <HeaderSideBar productActive={productActive} getItems={getItems} />
-            <hr style={{ width: "70%", margin: 0, marginTop: 10, marginBottom: 10 }} />
+    let empty = Object.keys((productActive ?? {})).length == 0
+    return <div className="side_bar">
+        <HeaderSideBar productActive={productActive} getItems={getItems} />
+        <hr style={{ width: "70%", margin: 0, marginTop: 10, marginBottom: 10 }} />
+        {!empty ? <>
             <section className="sidebar_description">
                 <div className="round_image" style={{ width: 200, height: 200, margin: "auto", marginTop: 10, marginBottom: 10 }}>
                     <img src={`${productActive.image}`} alt="" />
@@ -21,7 +22,7 @@ const SideBar = (props: side_bar) => {
                 <span>{productActive.description}</span>
             </section>
             <div style={{ marginLeft: 20, marginTop: 20 }}>
-                <ModalCadastro
+                <ModalCreate
                     getItems={getItems}
                     edit={true}
                     product={productActive} />
@@ -31,8 +32,8 @@ const SideBar = (props: side_bar) => {
                     })
                 }} />
             </div>
-        </div>
-        : <></>
+        </> : <></>}
+    </div>
 }
 
 export default SideBar

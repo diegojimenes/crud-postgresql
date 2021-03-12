@@ -12,7 +12,7 @@ const renderProducts = (listProducts: Array<Product>, setProduct: Function) => {
 
 const MainContent = (props: main_content) => {
     const { listProducts, setProduct, productActive, setProducts } = props
-    return <div className={`main_section ${!Object.keys(productActive).length ? 'fullsize' : ''}`}>
+    return <div className={`main_section ${!Object.keys((productActive ?? {})).length ? 'fullsize' : ''}`}>
         <header>
             <h1>Products</h1>
             <SearchBar setProducts={setProducts} />

@@ -1,0 +1,8 @@
+.side_bar {
+    width: 30%;
+    border-left: 1px solid #333;
+}
+
+.sidebar_description {
+    padding-left: 20px;
+}
